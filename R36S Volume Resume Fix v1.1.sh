@@ -15,11 +15,6 @@ echo "========================================================="
 echo "Starting..."
 sleep 0.5
 
-# --- system-sleep hook ---
-echo "Creating volume-resume-fix sleep hook..."
-sleep 1
-mkdir -p /lib/systemd/system-sleep
-
 # --- enable RetroArch network commands ---
 echo "Enabling network_cmd_enable in RetroArch configs..."
 sleep 1
@@ -29,6 +24,10 @@ for CFG in /home/ark/.config/retroarch/retroarch.cfg /home/ark/.config/retroarch
     fi
 done
 
+# --- system-sleep hook ---
+echo "Creating volume-resume-fix sleep hook..."
+sleep 1
+mkdir -p /lib/systemd/system-sleep
 cat > /lib/systemd/system-sleep/volume-resume-fix << 'EOF'
 #!/bin/bash
 case "$1" in
